@@ -11,7 +11,7 @@ void spec(stack_t **stack, unsigned int count)
 	int x;
 	instruction_t opst[] = {
 				{"push", push}, {"pall", pall}, {"pint", pint},
-				{"pop", pop}, {"swap", swap}, {NULL, NULL}
+				{"pop", pop}, {"swap", swap}, {"add", add},{NULL, NULL}
 				};
 	unsigned int i = 0;
 
@@ -103,6 +103,26 @@ void swap(stack_t **stack, unsigned int count)
 	else
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", count);
+		_exit_(*stack, EXIT_FAILURE, 1);
+	}
+}
+
+/**
+ * add - add the top 2 number
+ * @stack: the stack
+ * @count: the line counter
+ */
+
+void add(stack_t **stack, unsigned int count)
+{
+	if (*stack && (*stack)->prev)
+	{
+		(*stack)->prev->n += (*stack)->n;
+		pop(stack, count);
+	}
+	else
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", count);
 		_exit_(*stack, EXIT_FAILURE, 1);
 	}
 }
