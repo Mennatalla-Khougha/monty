@@ -11,7 +11,7 @@ void spec(stack_t **stack, unsigned int count)
 	int x;
 	instruction_t opst[] = {
 				{"push", push}, {"pall", pall}, {"pint", pint},
-				{NULL, NULL}
+				{"pop", pop}, {NULL, NULL}
 				};
 	unsigned int i = 0;
 
@@ -58,3 +58,28 @@ void pint(stack_t **stack, unsigned int count)
 	}
 }
 
+/**
+ * pop - deletes the top element
+ * @stack: the stack
+ * @count: the line counter
+ */
+void pop(stack_t **stack, unsigned int count)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", count);
+		fclose(args.file);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->prev)
+	{
+		*stack = (*stack)->prev;
+		free((*stack)->next);
+		(*stack)->next = NULL;
+	}
+	else
+	{
+		free(*stack);
+		*stack = NULL;
+	}
+}

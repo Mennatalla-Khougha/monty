@@ -59,5 +59,6 @@ void _exit_(stack_t *stack, int val, int order);
 void push(stack_t **stack, unsigned int count);
 void pall(stack_t **stack, unsigned int count);
 void pint(stack_t **stack, unsigned int count);
+void pop(stack_t **stack, unsigned int count);
 
 #endif
