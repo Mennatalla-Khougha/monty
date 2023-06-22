@@ -76,3 +76,28 @@ void rotl(stack_t **stack, unsigned int count)
 		pop(stack, count);
 	}
 }
+
+/**
+ * rotr - rotr the top number
+ * @stack: the stack
+ * @count: the line counter
+ */
+
+void rotr(stack_t **stack, unsigned int count)
+{
+	stack_t *current = *stack, *node;
+
+	(void)count;
+
+	if (*stack && (*stack)->prev)
+	{
+		while (current->prev)
+			current = current->prev;
+		node = create_node(*stack, current->n);
+		current->next->prev = NULL;
+		free(current);
+		(*stack)->next = node;
+		node->prev = *stack;
+		*stack = node;
+	}
+}
