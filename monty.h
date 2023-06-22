@@ -62,5 +62,6 @@ void pint(stack_t **stack, unsigned int count);
 void pop(stack_t **stack, unsigned int count);
 void swap(stack_t **stack, unsigned int count);
 void add(stack_t **stack, unsigned int count);
+void sub(stack_t **stack, unsigned int count);
 
 #endif
