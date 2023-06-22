@@ -95,3 +95,23 @@ void mod(stack_t **stack, unsigned int count)
 		_exit_(*stack, EXIT_FAILURE, 1);
 	}
 }
+
+/**
+ * push_queue - push_queue
+ * @stack: the stack
+ * @newNode: the newNode
+ *
+ * Return: 1 or 0
+ */
+int push_queue(stack_t **stack, stack_t *newNode)
+{
+	stack_t *current = *stack;
+
+	if (!args.flag)
+	return (0);
+	while (current->prev)
+		current = current->prev;
+	current->prev = newNode;
+	newNode->next = current;
+	return (1);
+}

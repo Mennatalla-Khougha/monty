@@ -61,6 +61,8 @@ void push(stack_t **stack, unsigned int count)
 		*stack = newNode;
 	else
 	{
+		if (push_queue(stack, newNode))
+			return;
 		newNode->prev = *stack;
 		(*stack)->next = newNode;
 		*stack = newNode;
