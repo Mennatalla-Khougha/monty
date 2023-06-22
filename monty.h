@@ -58,5 +58,6 @@ stack_t *create_node(stack_t *stack, int data);
 void _exit_(stack_t *stack, int val, int order);
 void push(stack_t **stack, unsigned int count);
 void pall(stack_t **stack, unsigned int count);
+void pint(stack_t **stack, unsigned int count);
 
 #endif

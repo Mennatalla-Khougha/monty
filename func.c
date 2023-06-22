@@ -10,7 +10,8 @@ void spec(stack_t **stack, unsigned int count)
 	char *token = NULL;
 	int x;
 	instruction_t opst[] = {
-				{"push", push}, {"pall", pall}, {NULL, NULL}
+				{"push", push}, {"pall", pall}, {"pint", pint},
+				{NULL, NULL}
 				};
 	unsigned int i = 0;
 
@@ -39,3 +40,21 @@ void spec(stack_t **stack, unsigned int count)
 		_exit_(*stack, EXIT_FAILURE, 1);
 	}
 }
+
+/**
+ * pint - print the top number
+ * @stack: the stack
+ * @count: the line counter
+ */
+void pint(stack_t **stack, unsigned int count)
+{
+	if (*stack)
+		printf("%d\n", (*stack)->n);
+	else
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", count);
+		fclose(args.file);
+		exit(EXIT_FAILURE);
+	}
+}
+
