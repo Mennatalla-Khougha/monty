@@ -65,5 +65,6 @@ void add(stack_t **stack, unsigned int count);
 void sub(stack_t **stack, unsigned int count);
 void _div(stack_t **stack, unsigned int count);
 void mul(stack_t **stack, unsigned int count);
+void mod(stack_t **stack, unsigned int count);
 
 #endif
