@@ -47,3 +47,23 @@ void _div(stack_t **stack, unsigned int count)
 		_exit_(*stack, EXIT_FAILURE, 1);
 	}
 }
+
+/**
+ * mul - mul the top number
+ * @stack: the stack
+ * @count: the line counter
+ */
+
+void mul(stack_t **stack, unsigned int count)
+{
+	if (*stack && (*stack)->prev)
+	{
+		(*stack)->prev->n *= (*stack)->n;
+		pop(stack, count);
+	}
+	else
+	{
+		fprintf(stderr, "L%d: can't mul, stack too short\n", count);
+		_exit_(*stack, EXIT_FAILURE, 1);
+	}
+}

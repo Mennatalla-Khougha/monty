@@ -12,7 +12,8 @@ void spec(stack_t **stack, unsigned int count)
 	instruction_t opst[] = {
 				{"push", push}, {"pall", pall}, {"pint", pint},
 				{"pop", pop}, {"swap", swap}, {"add", add},
-				{"sub", sub}, {"div", _div}, {NULL, NULL}
+				{"sub", sub}, {"div", _div}, {"mul", mul},
+				{NULL, NULL}
 				};
 	unsigned int i = 0;
 
