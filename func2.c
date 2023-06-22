@@ -55,3 +55,24 @@ void pstr(stack_t **stack, unsigned int count)
 	}
 	printf("\n");
 }
+
+/**
+ * rotl - rotl the top number
+ * @stack: the stack
+ * @count: the line counter
+ */
+
+void rotl(stack_t **stack, unsigned int count)
+{
+	stack_t *current = *stack, *node;
+
+	if (*stack && (*stack)->prev)
+	{
+		node = create_node(*stack, current->n);
+		while (current->prev)
+			current = current->prev;
+		current->prev = node;
+		node->next = current;
+		pop(stack, count);
+	}
+}
