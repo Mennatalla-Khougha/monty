@@ -14,6 +14,7 @@ stack_t *create_node(stack_t *stack, int data)
 	if (node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		_exit_(stack, EXIT_FAILURE, 1);
 	}
 	node->n = data;
 	node->prev = NULL;
@@ -38,6 +39,7 @@ void push(stack_t **stack, unsigned int count)
 	if (!num)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", count);
+		_exit_(*stack, EXIT_FAILURE, 1);
 	}
 	else
 	{
@@ -48,6 +50,7 @@ void push(stack_t **stack, unsigned int count)
 			if (num[i] < 48 || num[i] > 57)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", count);
+				_exit_(*stack, EXIT_FAILURE, 1);
 			}
 			i++;
 		}
@@ -66,6 +69,46 @@ void push(stack_t **stack, unsigned int count)
 	}
 }
 
+/**
+ * pall - print the list
+ * @stack: the stack
+ * @count: the line counter
+ */
+void pall(stack_t **stack, unsigned int count)
+{
+	stack_t *print = *stack;
+
+	(void)count;
+
+	while (print)
+	{
+		printf("%d\n", print->n);
+		print = print->prev;
+	}
+}
+
+/**
+ * _exit_ - free the stack and exit.
+ * @stack: the stack
+ * @val: the return value
+ * @order: flag to close or not close
+ */
+
+void _exit_(stack_t *stack, int val, int order)
+{
+	stack_t *tmp;
+
+	while (stack)
+	{
+		tmp = stack->prev;
+		free(stack);
+		stack = tmp;
+	}
+	free(args.line);
+	if (order)
+		fclose(args.file);
+	exit(val);
+}
 
 /**
  * main - the main function
@@ -83,11 +126,13 @@ int main(int argc, char **argv)
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
+		_exit_(stack, EXIT_FAILURE, 0);
 	}
 	args.file = fopen(argv[1], "r");
 	if (!args.file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		_exit_(stack, EXIT_FAILURE, 0);
 	}
 	while (buffer > 0)
 	{
@@ -96,5 +141,6 @@ int main(int argc, char **argv)
 		if (buffer > 0)
 			spec(&stack, count);
 	}
+	_exit_(stack, 0, 1);
 	return (0);
 }

@@ -10,7 +10,7 @@ void spec(stack_t **stack, unsigned int count)
 	char *token = NULL;
 	int x;
 	instruction_t opst[] = {
-				{"push", push},{NULL, NULL}
+				{"push", push}, {"pall", pall}, {NULL, NULL}
 				};
 	unsigned int i = 0;
 
@@ -36,5 +36,6 @@ void spec(stack_t **stack, unsigned int count)
 	if (!opst[i].opcode && token)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", count, token);
+		_exit_(*stack, EXIT_FAILURE, 1);
 	}
 }
